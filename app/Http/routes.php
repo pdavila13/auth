@@ -15,16 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/resource', function () {
+Route::get('/login',       ['as' => 'auth.login',    'uses' => 'LoginController@getLogin']);
 
-    \Debugbar::startMesuare('resource');
+Route::post('/postLogin',   ['as' => 'auth.postLogin','uses' => 'LoginController@postLogin']);
+
+Route::get('/home', ['as' => 'auth.home', function() {
+    return view('home');
+}]);
+
+Route::get('/resource', function() {
 
     $authenticated = false;
     Session::set('authenticated',true);
-    //dd(Session::all());
-
-    \Debugbar::info("Xivato!");
-    \Debugbar::info(Session::all());
 
     if(Session::has('authenticated')){
         if(Session::get('authenticated') == true) {
@@ -33,10 +35,8 @@ Route::get('/resource', function () {
     }
 
     if($authenticated){
-        \Debugbar::stopMesuare('resource');
         return view('resource');
     } else {
-        \Debugbar::stopMesuare('resource');
         return view('login');
     }
 
