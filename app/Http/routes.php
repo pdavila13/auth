@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::get('/resource', function () {
 
+    \Debugbar::startMesuare('resource');
+
     $authenticated = false;
     Session::set('authenticated',true);
     //dd(Session::all());
@@ -31,8 +33,10 @@ Route::get('/resource', function () {
     }
 
     if($authenticated){
+        \Debugbar::stopMesuare('resource');
         return view('resource');
     } else {
+        \Debugbar::stopMesuare('resource');
         return view('login');
     }
 
