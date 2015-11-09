@@ -11,20 +11,24 @@
 |
 */
 
-Routes::get('/patata',function() {
-   echo "Hello";
-});
+Route::get('/login',
+    ['as' => 'auth.login',
+     'uses' => 'LoginController@getLogin'
+]);
 
-Route::get('/login',       ['as' => 'auth.login',    'uses' => 'LoginController@getLogin']);
-
-Route::post('/postLogin',  ['as' => 'auth.postLogin','uses' => 'LoginController@postLogin']);
+Route::post('/postLogin',
+    ['as' => 'auth.postLogin',
+     'uses' => 'LoginController@postLogin'
+]);
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', ['as' => 'auth.home', function() {
-    return view('home');
+Route::get('/home',
+    ['as' => 'auth.home', function() {
+
+        return view('home');
 }]);
 
 Route::get('/resource', function() {
