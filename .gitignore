@@ -1,12 +1,9 @@
+*~
 /vendor
-<<<<<<< HEAD
 /node_modules
 Homestead.yaml
 Homestead.json
 .env
-./idea
-*~
-=======
+.idea/
 composer.lock
-.idea
->>>>>>> af6d9a7fa1eb035bd2177a746106964e39b3e1be
+_ide_helper.php
