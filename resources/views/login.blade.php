@@ -54,14 +54,16 @@
             </div>
             <div class="checkbox">
                 <lave>
-                    <input type="checkbox">Remember me
+                    <input name="remember" type="checkbox">Remember me
                 </lave>
             </div>
 
-            <button type="submit" class="btn btn-default">Login</button>
+            <button id="login" type="submit" class="btn btn-default">Login</button>
             <button type="reset" class="btn btn-default">Reset</button>
 
         </form>
+
+        <a id="register" rel="stylesheet" href="{{ route('auth.register') }}">Registra-te</a>
     </div>
 </div>
 </body>
