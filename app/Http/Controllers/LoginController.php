@@ -19,16 +19,20 @@ class LoginController extends Controller {
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function postLogin(Request $request){
-        //dd($request->all());
-        //dd(Input::all());
-        //\Debugbar::info("Entra a postLogin");
-        echo "postLogin OK!";
+
+    public function postLogin(Request $request) {
+
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
 
         if($this->login($request->email,$request->password)){
             //REDIRECT TO HOME
             return redirect()->route('auth.home');
         } else {
+            $request->session()->flash('login_error', 'Login incorrecte!');
+
             //REDIRECT BACK
             return redirect()->route('auth.login');
         }
@@ -47,7 +51,6 @@ class LoginController extends Controller {
         $user = User::where('email', $email)->first();
 
         //return $user->password == bcrypt($password) ? true : false;
-
         return Hash::check($password, $user->password) ? true : false;
     }
 

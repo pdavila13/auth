@@ -38,16 +38,14 @@
             <label>
                 <input value="remember-me" type="checkbox"> Remember me
             </label>
-        </div>
 
-        <div>
             <lavel>
                 <a id="register" rel="stylesheet" href="{{ route('auth.register') }}">Registra-te</a>
             </lavel>
         </div>
 
-        <button class="btn btn-lg btn-primary btn-group" type="submit">Login</button>
-        <button class="btn btn-lg btn-primary btn-group" type="submit">Registrar</button>
+        <button class="btn btn-primary btn-group" type="submit">Login</button>
+        <button class="btn btn-primary btn-group" type="submit">Registrar</button>
     </form>
 
 

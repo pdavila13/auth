@@ -11,26 +11,22 @@ use Input;
 
 class RegisterController extends Controller {
     //
-    public function getRegister() {
-        //echo "Aquí va el registre";
-        return view('register');
-    }
 
     public function postRegister(Request $request) {
 
         $this->validate($request, [
            'name' => 'required|max:100',
-           'email' => 'required|email|unique',
-           'password' => 'required',
+           'email' => 'required|email|unique:users,email',
+           'password' => 'required|confirmed'
         ]);
 
         $user = new User();
-
         $user->name = $request->get('name');
-        $user->password = bcrypt(Input::get('password'));
+        $user->password = bcrypt($request->get('password'));
         $user->email = $request->get('email');
-
         $user->save();
+
+        return redirect()->route('auth.login');
     }
 
     /*
@@ -45,4 +41,12 @@ class RegisterController extends Controller {
         $user->save();
     }
     */
+
+
+    public function getRegister() {
+        //echo "Aquí va el registre";
+        return view('register');
+    }
+
+
 }

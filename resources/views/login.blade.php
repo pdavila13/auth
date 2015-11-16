@@ -40,17 +40,40 @@
     <div class="content">
         <div class="title">LOGIN</div>
 
+        <!--Mostra missatge error si els camps no són correctes-->
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        
+        <!--Mostra missatge error si el login no és correcte-->
+        @if (Session::has('login_error'))
+            <div class="alert alert-danger">
+                <ul>
+                    <li>{{ Session::get('login_error') }}</li>
+                </ul>
+            </div>
+        @endif
+
         <form method="post" action="{{ route('auth.postLogin') }}">
             <!--{ !! csrf_field() !! }-->
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <lavel for="email">EmailAdr: </lavel>
-                <input type="email" class="form-control" id="email" name="email">
+                <input type="email" class="form-control" id="email" name="email"
+                       placeholder="myemail@mydomain.com"
+                       value="{{ old('email') }}"
+                       required>
             </div>
 
             <div class="form-group">
                 <lavel for="password">Password: </lavel>
-                <input type="password" class="form-control" id="password" name="password">
+                <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <div class="checkbox">
                 <lave>
@@ -63,7 +86,7 @@
 
         </form>
 
-        <a id="register" rel="stylesheet" href="{{ route('auth.register') }}">Registra-te</a>
+        <a id="register" rel="stylesheet" href="{{ route('register.register') }}">Registra-te</a>
     </div>
 </div>
 </body>

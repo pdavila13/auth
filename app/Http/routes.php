@@ -21,28 +21,13 @@ Route::post('/postLogin',
      'uses' => 'LoginController@postLogin'
 ]);
 
-Route::get('/register',
-    ['as' => 'auth.register',
-        'uses' => 'RegisterController@getRegister'
-    ]);
-
-Route::post('/postRegister',
-    ['as' => 'register.postRegister',
-        'uses' => 'RegisterController@postRegister'
-    ]);
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/login2', function () {
     return view('login2');
 });
-
-/*
-Route::get('/register',
-    ['as' => 'auth.register',
-        'uses' => 'LoginController@login',
-        function(){
-            echo "Aquí et registraràs";
-        }
-    ]);*/
 
 Route::get('/home',
     ['as' => 'auth.home', function() {
@@ -72,3 +57,13 @@ Route::get('/resource', function() {
 Route::get('/flushSession', function () {
     Session::flush();
 });
+
+Route::get('/register',
+    ['as' => 'register.register',
+        'uses' => 'RegisterController@getRegister'
+    ]);
+
+Route::post('/postRegister',
+    ['as' => 'register.postRegister',
+        'uses' => 'RegisterController@postRegister'
+    ]);

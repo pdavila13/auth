@@ -40,34 +40,47 @@
         <div class="content">
             <div class="title">REGISTRE</div>
 
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form method="post" action="{{ route('register.postRegister') }}">
-                <!--{ !! csrf_field() !! }-->
+                <!--{!! csrf_field() !!}-->
+
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
                 <div class="form-group">
-                    <lavel for="name">UserName: </lavel>
-                    <input type="name" class="form-control" id="name" name="name">
+                    <label for="name">User name:</label>
+                    <input type="text" class="form-control" id="name" name="name"
+                           placeholder="El teu nom aquí"
+                           value="{{ old('name') }}"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address:</label>
+                    <input type="email" class="form-control" id="email" name="email"
+                           placeholder="myemail@domain.com"
+                           value="{{ old('email') }}"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="password_confirmation">Password confirm:</label>
+                    <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                 </div>
 
-                <div class="form-group">
-                    <lavel for="email">EmailAdr: </lavel>
-                    <input type="email" class="form-control" id="email" name="email">
-                </div>
-
-                <div class="form-group">
-                    <lavel for="password">Password: </lavel>
-                    <input type="password" class="form-control" id="password" name="password">
-                </div>
-
-                <div class="form-group">
-                    <lavel for="password">Password: </lavel>
-                    <input type="password" class="form-control" id="password" name="password">
-                </div>
-
-                <button id="register" type="submit" class="btn btn-default">Registre</button>
+                <button id="login" type="submit" class="btn btn-default">Register</button>
                 <button type="reset" class="btn btn-default">Reset</button>
-
             </form>
+            <br>
 
             Ja tens usuari?
             <a id="login" rel="stylesheet" href="{{ route('auth.login') }}">Login</a>
