@@ -37,16 +37,22 @@ Route::get('/home',
 
 Route::get('/resource', function() {
 
-    $authenticated = false;
-    Session::set('authenticated',true);
+//    $authenticated = false;
+//    Session::set('authenticated',true);
+//
+//    if(Session::has('authenticated')){
+//        if(Session::get('authenticated') == true) {
+//            $authenticated = true;
+//        }
+//    }
+//
+//    if($authenticated){
+//        return view('resource');
+//    } else {
+//        return redirect()->route('auth.login');
+//    }
 
-    if(Session::has('authenticated')){
-        if(Session::get('authenticated') == true) {
-            $authenticated = true;
-        }
-    }
-
-    if($authenticated){
+    if(Auth::check()) {
         return view('resource');
     } else {
         return redirect()->route('auth.login');

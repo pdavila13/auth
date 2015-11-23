@@ -27,31 +27,49 @@ class ExampleTest extends TestCase
         $this->visit(route('auth.login'))->see('LOGIN');
     }
 
-    public function testUserWithoutAccessToResource()
+    public function atestUserWithoutAccessToResource()
     {
+        $this->unlogged();
+        $this->visit('/resource')
+            ->seePageIs(route('auth.login'))
+            ->see('Login')
+            ->dontSee('Logout');
+
         //Session::set('autenticated' == false);
-        //$this->unlogged();
-        $this->visit('/resource')->see('RESOURCE');
+        //$this-> unlogged();
+        //$this->visit('/resource')->see('RESOURCE');
         //$this->visit('/resource')->seePageIs(route('auth.login'));
-        //$this->visit('/resource')->seePageIs(route('auth.login'))->see('Login')->dontSee('Logout');
+        /*$this->visit('/resource')
+            ->seePageIs(route('auth.login'))
+            ->see('Login')
+            ->dontSee('Logout');*/
+    }
+
+    public function testUserWithAccessToResource()
+    {
+        $this->logged();
+        $this->visit('/resource')
+            ->seePageIs('/resource');
     }
 
     public function logged()
     {
-        Session::set('autenticated',true);
+        Auth::loginUsingId(1);
+        //Session::set('autenticated',true);
     }
 
     public function unlogged()
     {
-        Session:set('autenticated',false);
+        Auth::logout();
+        //Session:set('autenticated',false);
     }
 
-    public function testLoginPageHaveRegisterLinkAndWorksOk()
+    public function AtestLoginPageHaveRegisterLinkAndWorksOk()
     {
         //$this->visit('/login')->Click('register')->seePageIs('/register');
     }
 
-    public function testPostLoginOk()
+    public function AtestPostLoginOk()
     {
         $this->visit('/login')
             ->type('pepitopalotes@iesebre.com', 'email')
@@ -61,7 +79,7 @@ class ExampleTest extends TestCase
             ->seePageIs('/home');
     }
 
-    public function testPostLoginNotOk()
+    public function AtestPostLoginNotOk()
     {
         $this->visit('/login')
             ->type('paolodavila@iesebre.com', 'email')
