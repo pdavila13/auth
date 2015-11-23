@@ -5,6 +5,9 @@
 
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet" type="text/css">
+
     <style>
         html, body {
             height: 100%;
@@ -50,7 +53,7 @@
                 </ul>
             </div>
         @endif
-        
+
         <!--Mostra missatge error si el login no és correcte-->
         @if (Session::has('login_error'))
             <div class="alert alert-danger">

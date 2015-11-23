@@ -5,6 +5,9 @@
 
     <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
 
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css">
+    <!--<link href="{{ asset('css/all.css') }}" rel="stylesheet" type="text/css">-->
+
     <style>
         html, body {
             height: 100%;
@@ -61,12 +64,14 @@
                            value="{{ old('name') }}"
                            required>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="emailFromGroup">
                     <label for="email">Email address:</label>
                     <input type="email" class="form-control" id="email" name="email"
                            placeholder="myemail@domain.com"
                            value="{{ old('email') }}"
-                           required>
+                           required
+                    v-on:onblur="checkEmailExists">
+                    <div v-show="exists">Email ja existeix!</div>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
@@ -77,7 +82,7 @@
                     <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
                 </div>
 
-                <button id="login" type="submit" class="btn btn-default">Register</button>
+                <button id="login" type="submit" class="btn btn-primary">Register</button>
                 <button type="reset" class="btn btn-default">Reset</button>
             </form>
             <br>
@@ -86,5 +91,8 @@
             <a id="login" rel="stylesheet" href="{{ route('auth.login') }}">Login</a>
         </div>
     </div>
+
+    <script src="{{ asset('js/main.js') }}"></script>
+    <!--<script src="{{ asset('js/all.js') }}"></script>-->
 </body>
 </html>
