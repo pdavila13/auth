@@ -22,10 +22,35 @@ class AuthServiceProvider extends ServiceProvider
      * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
      * @return void
      */
-    public function boot(GateContract $gate)
-    {
+    public function boot(GateContract $gate) {
         $this->registerPolicies($gate);
 
-        //
+        $gate->define('is-superadmin',
+            function ($user) {
+//                return $user->isAdmin();
+                return $user->is_admin == true;
+            }
+        );
+
+        $gate->define('update-user',
+            function ($user) {
+                $roles = $user->roles();
+                foreach ($roles as $role) {
+                    $permissions = $role->permissions();
+                    foreach ($permissions as $permission) {
+                        if ($permission == 'update-user') {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+        );
+
+        $gate->define('update-post',
+            function ($user, $post) {
+                return $user->id === $post->user_id;
+            }
+        );
     }
 }
