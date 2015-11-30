@@ -12,7 +12,6 @@
         html, body {
             height: 100%;
         }
-
         body {
             margin: 0;
             padding: 0;
@@ -21,18 +20,15 @@
             font-weight: 100;
             font-family: 'Lato';
         }
-
         .container {
             text-align: center;
             display: table-cell;
             vertical-align: middle;
         }
-
         .content {
             text-align: center;
             display: inline-block;
         }
-
         .title {
             font-size: 96px;
         }
@@ -40,9 +36,9 @@
 </head>
 <body>
     <div class="container">
-        <div class="content">
-            <div class="title">REGISTRE</div>
+        <div class="jumbotron">REGISTER</div>
 
+        <div class="content">
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     <ul>
@@ -64,15 +60,19 @@
                            value="{{ old('name') }}"
                            required>
                 </div>
+
                 <div class="form-group" id="emailFromGroup">
                     <label for="email">Email address:</label>
+
                     <input type="email" class="form-control" id="email" name="email"
-                           placeholder="myemail@domain.com"
+                           placeholder="@{{placeholder}}"
                            value="{{ old('email') }}"
                            required
-                    v-on:onblur="checkEmailExists">
-                    <div v-show="exists">Email ja existeix!</div>
+                           v-on:blur="checkEmailExists">
+
+                    <!--<div v-show="exists">Email ja existeix!</div>-->
                 </div>
+
                 <div class="form-group">
                     <label for="password">Password:</label>
                     <input type="password" class="form-control" id="password" name="password" required>

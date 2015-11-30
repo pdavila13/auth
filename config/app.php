@@ -148,6 +148,9 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
+        // AdminLTE template provider
+        'Acacha\AdminLTETemplateLaravel\app\Providers\AdminLTETemplateServiceProvider',
+
     ],
 
     /*
