@@ -35,29 +35,16 @@ Route::get('/home',
         return view('home');
 }]);
 
-Route::get('/resource', function() {
+Route::get('/phpinfo', function() {
+    return phpinfo();
+});
 
-//    $authenticated = false;
-//    Session::set('authenticated',true);
-//
-//    if(Session::has('authenticated')){
-//        if(Session::get('authenticated') == true) {
-//            $authenticated = true;
-//        }
-//    }
-//
-//    if($authenticated){
-//        return view('resource');
-//    } else {
-//        return redirect()->route('auth.login');
-//    }
-
-    if(Auth::check()) {
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/resource', ['as' => 'resource', function() {
         return view('resource');
-    } else {
-        return redirect()->route('auth.login');
-    }
+    }]);
 
+    //Route::get('patata', ['as' => 'patata' uses => 'PatataController@getPatata']);
 });
 
 Route::get('/flushSession', function () {
